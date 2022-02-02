@@ -2,6 +2,7 @@ package com.zwt.jetpackdemo.util
 
 import android.content.Context
 import android.util.Log
+import com.zwt.jetpackdemo.databinding.DataBindingDemoActivity
 import com.zwt.jetpackdemo.viewbinding.ViewBindingActivity
 import java.text.ParsePosition
 
@@ -17,6 +18,7 @@ class IntentUtil {
             Log.e("debug", "position : $position")
             when (position) {
                 Constants.VIEW_BINDING -> ViewBindingActivity.launcher(context)
+                Constants.DATA_BINDING -> DataBindingDemoActivity.launcher(context)
             }
         }
     }

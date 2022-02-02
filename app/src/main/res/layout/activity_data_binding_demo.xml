@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.util.SparseArray" />
+
+        <import type="java.util.Map" />
+
+        <import type="java.util.List" />
+
+        <import type="com.zwt.jetpackdemo.databinding.bean.User" />
+
+        <import type="com.zwt.jetpackdemo.databinding.DataBindingUtil" />
+
+        <import type="com.zwt.jetpackdemo.databinding.MyHandlers" />
+
+        <import type="com.zwt.jetpackdemo.databinding.bean.ObservableUser" />
+
+        <import type="androidx.databinding.ObservableArrayMap" />
+
+
+        <variable
+            name="user"
+            type="User" />
+
+        <variable
+            name="list"
+            type="List&lt;User>" />
+
+        <variable
+            name="map"
+            type="Map&lt;String,User>" />
+
+        <variable
+            name="index"
+            type="int" />
+
+        <variable
+            name="key"
+            type="String" />
+
+        <variable
+            name="handlers"
+            type="MyHandlers" />
+
+        <variable
+            name="observableUser"
+            type="ObservableUser" />
+
+        <variable
+            name="observableMap"
+            type="ObservableArrayMap&lt;String, Object>" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".databinding.DataBindingDemoActivity">
+
+        <TextView
+            android:id="@+id/name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handlers::onClick}"
+            android:text="@{user.name}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/address_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handlers::onClick}"
+            android:text="@{user.address + nameView.text}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_view" />
+
+        <TextView
+            android:id="@+id/list_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handlers::onClick}"
+            android:text="@{DataBindingUtil.getUserName(list[index])}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address_view" />
+
+        <TextView
+            android:id="@+id/map_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(mapView) -> handlers.onSaveUser(mapView, user)}"
+            android:text="@{DataBindingUtil.getUserName(map[key])}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_view" />
+
+        <LinearLayout
+            android:id="@+id/include_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/map_view">
+
+            <include
+                layout="@layout/data_binding_include_view"
+                app:titleHandlers="@{handlers}"
+                app:titleUser="@{user}" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/observable_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(observableView) -> handlers.onObservableClick(observableView, observableUser)}"
+            android:text="@{observableUser.name + String.valueOf(observableUser.age)}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_layout" />
+
+        <TextView
+            android:id="@+id/observable_map_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(observableMapView) -> handlers.onObservableArrayMapClick(observableMapView, observableMap)}"
+            android:text="@{observableMapView[key]}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

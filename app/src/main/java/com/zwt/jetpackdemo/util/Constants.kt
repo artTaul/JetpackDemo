@@ -9,5 +9,6 @@ package com.zwt.jetpackdemo.util
 class Constants {
     companion object {
         const val VIEW_BINDING = 0
+        const val DATA_BINDING = 1
     }
 }

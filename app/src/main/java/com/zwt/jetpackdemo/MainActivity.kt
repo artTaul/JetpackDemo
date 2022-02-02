@@ -37,5 +37,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
         list.add("ViewBinding demo")
+        list.add("DataBinding demo")
     }
 }
